@@ -1,0 +1,264 @@
+/* Estilos generales del cuerpo */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    /* Color de fondo base, el fondo real irá en el lienzo de partículas */
+    background-color: #111;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 0 20px;
+    box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
+}
+
+/* Estilos para el lienzo de partículas */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0; /* Se asegura que esté detrás del .container */
+    /* Colocamos el fondo aquí para que las partículas se dibujen sobre él */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/background.jpg');
+    background-size: cover;
+    background-position: center 15%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Estilos del contenedor principal */
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    position: relative; /* Necesario para que z-index funcione */
+    z-index: 1; /* Asegura que el contenido esté sobre las partículas */
+    margin-left: auto; /* Asegura que el contenedor esté centrado por defecto */
+    margin-right: auto; /* Asegura que el contenedor esté centrado por defecto */
+}
+
+/* Estilos para el logo con animación */
+.logo {
+    width: 360px;
+    height: 144px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    animation: pulse 2s ease-in-out infinite; 
+    transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+.logo.scrolled {
+    width: 306px;
+    height: 122px;
+}
+
+/* Estilos para el título */
+h1 {
+    margin: 0;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 2em;
+}
+
+/* Estilos para la lista de subtítulos */
+.subtitle-list {
+    list-style: none;
+    padding: 0;
+    margin: -15px 0 30px 0;
+    display: inline-block;
+    text-align: center;
+}
+
+.subtitle-list li {
+    font-size: 1em;
+    font-weight: 400;
+    color: #dddddd;
+    line-height: 1.5;
+}
+
+.subtitle-list li::before {
+    content: "- ";
+}
+
+/* Estilos para los enlaces */
+.links a {
+    display: block;
+    background-color: #3d3d3d;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    /* Estilos del pseudo-elemento para la animación de destello */
+    transform: scale(1);
+}
+
+.links a:hover {
+    transform: scale(1.05); /* Escala el botón al pasar el mouse */
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(61, 61, 61, 1) 100%);
+}
+
+.links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -200%; /* Mueve el destello fuera de la vista inicialmente */
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-20deg); /* Inclina el destello para el efecto de brillo */
+    transition: all 0.3s ease;
+    /* La animación se repite cada 8 segundos */
+    animation: shine 8s infinite linear; 
+}
+
+/* Animación del destello */
+@keyframes shine {
+    0% {
+        left: -200%;
+    }
+    10% {
+        left: 100%; /* El destello cruza el botón */
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Media query para pantallas de móviles (hasta 767px) */
+@media (max-width: 767px) {
+    body {
+        align-items: flex-start;
+        padding-top: 30vh; /* Subimos la caja un poco */
+        padding-bottom: 5vh; /* Añadimos un pequeño espacio inferior */
+        overflow: auto;
+    }
+
+    .logo {
+        width: 288px;
+        height: 115px;
+    }
+
+    .logo.scrolled {
+        width: 245px;
+        height: 98px;
+    }
+}
+
+/* Media query para pantallas más grandes (versión de PC) */
+@media (min-width: 768px) {
+    body {
+        display: flex;
+        justify-content: flex-end; /* Alinea los elementos al final del eje principal (derecha) */
+        align-items: center; /* Centra los elementos verticalmente */
+        padding-right: 10%; /* Esto crea el margen robusto que pides */
+        padding-left: 0;
+    }
+
+    #particles-js {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/imagen-de-fondo-pc.jpg');
+        background-position: center top;
+    }
+
+    .container {
+        /* El contenedor ya no necesita márgenes, ya que el padding del body lo maneja */
+        margin: 0;
+        text-align: center;
+    }
+
+    
+}
+.footer-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: #cccccc;
+    margin-top: 30px;
+}
+
+/* Estilos para la marca de agua */
+.watermark {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    opacity: 0.3;
+    pointer-events: none; /* Para que no interfiera con los clics */
+    transition: opacity 0.3s ease-in;
+}
+
+.watermark.hidden {
+    opacity: 0;
+}
+
+.watermark img {
+    width: 120px; /* Ancho sutil */
+    height: auto;
+}
+
+.instagram-wrapper {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.instagram-link {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-color: #3d3d3d;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.instagram-link:hover {
+  transform: scale(1.1);
+  background-color: #4a4a4a;
+}
+
+.instagram-link svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
+.instagram-text {
+    font-size: 0.8em;
+    color: #cccccc;
+    margin-top: 5px;
+}
+
+/* Estilos para el botón dorado */
+#personal-account-btn {
+    background-color: #bd973e;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+#personal-account-btn:hover {
+    background-image: linear-gradient(to top, rgba(189, 151, 62, 0.8) 0%, rgba(189, 151, 62, 1) 100%);
+    color: #FFFFFF;
+}
+
+.main-title {
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #fff;
+    text-transform: uppercase;
+}
